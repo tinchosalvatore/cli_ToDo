@@ -1,80 +1,84 @@
-# 👾 CLI ToDo Tool by tinchosalvatore
+# 👾 CLI ToDo Tool by tinchosalvatore (V2 Nexus)
+
+[![Leer en Español](https://img.shields.io/badge/Lang-Español-red)](docs/README.es.md)
 
 ### *A KISS philosophy task manager for the terminal*
 
-Una herramienta de línea de comandos (CLI) ultraligera, rápida y estética, diseñada para informáticos que viven en la terminal. Basada en la simplicidad, utiliza **JSON** para persistencia, **Rich** para una UI moderna y **Nerd Fonts** para una experiencia visual superior.
+An ultra-lightweight, fast, and aesthetic Command Line Interface (CLI) tool, designed for computer scientists who live in the terminal. Based on simplicity, it uses **JSON** for persistence, **Rich** for a modern UI, and **Nerd Fonts** for a superior visual experience.
+
+**V2 New Feature:** It is now **Context Aware**. Tasks are saved linked to the specific directory you are working in.
 
 ---
 
-## 📚 Características
+## 📚 Features
 
-Esta herramienta sigue el principio **KISS** (*Keep It Simple, Stupid*):
+This tool follows the **KISS** (*Keep It Simple, Stupid*) principle:
 
-* **Sin sobrecarga**: Sin bases de datos pesadas; solo un archivo JSON.
-* **IDs Dinámicos**: Los números de tarea se recalculan automáticamente para evitar huecos al borrar.
-* **Velocidad**: Comandos cortos y directos para no interrumpir el flujo de trabajo.
+* **Contextual (Multitenancy)**: Manages independent task lists per project/directory.
+* **Omni View**: A "God Mode" to see all your tasks from all projects in a single list.
+* **No Overhead**: No heavy databases; just a structured JSON file.
+* **Dynamic IDs**: Task numbers are automatically recalculated to avoid gaps when deleting.
 
 ---
 
-## 🧰 Instalación
+## 🧰 Installation
 
-### Requisitos previos
+### Prerequisites
 
 * **Python 3.10+**
-* **Nerd Fonts** (Recomendado: *JetBrainsMono Nerd Font*) para ver los iconos correctamente.
+* **Nerd Fonts** (Recommended: *JetBrainsMono Nerd Font*) to render icons correctly.
 
-### Pasos
+### Steps
 
-1. Clona este repositorio o descarga los archivos.
-2. Dale permisos de ejecución al instalador:
+1. Clone this repository or download the files.
+2. Grant execution permissions to the installer:
 ```bash
 chmod +x setup.sh
 
 ```
 
+3. Run the setup (it will create the virtual environment and the symbolic link):
 
-3. Ejecuta el setup y elige tu idioma (**en/es**):
 ```bash
 ./setup.sh
 
 ```
 
-
-4. **Reinicia tu terminal** o recarga tu configuración (`source ~/.zshrc` o `.bashrc`).
+4. **Restart your terminal** or reload your configuration (`source ~/.zshrc` or `.bashrc`).
 
 ---
 
-## ⌨️ Uso de Comandos
+## ⌨️ Command Usage
 
-El comando base es `todo`. Aquí tienes la lista de argumentos disponibles:
+The base command is `todo`. Remember that **tasks now depend on the directory** you are in.
 
-| Comando | Descripción | Ejemplo |
+| Command | Description | Example |
 | --- | --- | --- |
-| `todo` | Muestra la lista completa y el progreso. | `todo` |
-| `todo -a <tarea>` | Añade una nueva tarea (no requiere comillas). | `todo -a Estudiar Física` |
-| `todo -t <id>` | **Toggle**: Marca o desmarca una tarea como hecha. | `todo -t 1` |
-| `todo -d <id>` | **Delete**: Elimina la tarea y reajusta los IDs. | `todo -d 2` |
-| `todo -u` | Muestra solo las tareas **pendientes**. | `todo -u` |
-| `todo -r` | **Reset**: Reinicia todas las tareas a pendientes. | `todo -r` |
+| `todo` | Shows tasks for the **current directory**. | `todo` |
+| `todo -a <task>` | Adds a task to the current directory. | `todo -a Deploy to prod` |
+| `todo -t <id>` | **Toggle**: Marks/Unmarks a task as done. | `todo -t 1` |
+| `todo -d <id>` | **Delete**: Removes the task and readjusts IDs. | `todo -d 2` |
+| `todo -u` | Shows only **Pending** tasks (if empty, celebrate!). | `todo -u` |
+| `todo -r` | **Wipeout**: DELETES all tasks in this directory (total cleanup). | `todo -r` |
+| `todo -o` | **Omni View**: Shows ALL tasks from ALL directories. | `todo -o` |
 
 ---
 
-## ⚙️ Desinstalación
+## ⚙️ Uninstallation
 
-Si deseas eliminar la herramienta pero **mantener tus datos** (tareas guardadas):
+The new uninstaller is smart and protects your data:
 
-1. Ejecuta el script de desinstalación:
+1. Run the uninstallation script:
+
 ```bash
 chmod +x uninstall.sh && ./uninstall.sh
 
 ```
 
-
-
-> **Nota:** Tus tareas se guardan en `~/.config/cli_ToDo/tasks.json`. Si también quieres borrar tus datos, elimina esa carpeta manualmente con `rm -rf ~/.config/cli_ToDo`.
+> **Note:** The script will interactively ask you if you wish to delete the configuration and saved tasks in `~/.config/cli_ToDo/tasks.json` or if you prefer to keep them for the future.
 
 ---
 
-## 👨‍💻 Créditos
+## 👨‍💻 Credits
 
-Desarrollado por **tinchosalvatore**.
+Developed by **tinchosalvatore**.
