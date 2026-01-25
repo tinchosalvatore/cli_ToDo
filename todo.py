@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CLI ToDo App - V2.0 "Nexus"
+CLI ToDo App - V2.0.1
 Author: tinchosalvatore
 Description: Herramienta CLI minimalista con gestión de tareas contextual (por directorio).
              Incluye modo 'Omni' para vista global y persistencia JSON estructurada.
@@ -27,7 +27,6 @@ custom_theme = Theme({
     "danger": "red",
     "dim": "dim white",
     "header_bg": "bold black on #E6DB74",
-    "path_header": "bold white on #5f87af",  # Nuevo estilo para cabeceras de ruta
     "id_col": "cyan",
 })
 
@@ -153,8 +152,7 @@ def print_tasks(tasks, context_name=None, show_only_uncompleted=False, is_omni=F
     elif not is_omni:
         # Modo Normal: Cabecera estándar
         console.print()
-        console.print(Text("   ToDo Context ", style="header_bg"), justify="left")
-        console.print(Text(f" {get_context_path()}", style="dim italic"), justify="left")
+        console.print(Text("   ToDo List ", style="header_bg"), justify="left")
         console.print()
 
     completed_count = 0
@@ -191,7 +189,7 @@ def print_tasks(tasks, context_name=None, show_only_uncompleted=False, is_omni=F
         console.print()
         progress_render = get_progress_bar(completed_count, total_count)
         console.print(progress_render)
-        console.print("v2.0 Nexus", style="dim italic", justify="right")
+        console.print("v2.0.1 by tinchosalvatore", style="dim italic", justify="right")
         console.print()
 
 # ==========================================
@@ -237,10 +235,10 @@ def show_omni_view(show_uncompleted=False):
     """Feature 4: Muestra tareas de TODOS los directorios registrados."""
     db = load_db()
     if not db:
-        console.print(Panel("El universo está vacío. No hay tareas registradas.", style="warning"))
+        console.print(Panel("🪐 El universo está vacío 🪐. No hay tareas por aquí.", style="warning"))
         return
 
-    console.print(Text(" 🪐 OMNI VIEW - GLOBAL STATUS ", style="bold white on purple"), justify="center")
+    console.print(Text(" 🪐 OMNI VIEW - GLOBAL STATUS 🪐 ", style="bold black on #fe8019"), justify="center")
     console.print()
 
     # Ordenamos paths alfabéticamente para que se vea ordenado
