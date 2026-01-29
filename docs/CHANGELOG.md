@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **UI:** More minimalistic UI, quitted directory contexto and changed colors for omni view with some new icons.
+- **Traduction:** Tool output was originally in Spanish, no it is completely in English + argparse too
 
 ## [2.0.0] - 2026-01-25
 ### Added

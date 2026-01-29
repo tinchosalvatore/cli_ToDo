@@ -132,12 +132,12 @@ def print_tasks(tasks, context_name=None, show_only_uncompleted=False, is_omni=F
     if not visible_tasks:
         # Si venimos de un filtrado (-u) y está vacío, es que todo está hecho -> CELEBRAR
         if show_only_uncompleted and tasks: 
-             msg = "  ¡Todo limpio! Tareas al día."
+             msg = "  All clean! Tasks up to date."
         elif not tasks:
-             msg = "  Sin tareas aquí."
+             msg = "  No tasks here."
         else:
             # Caso raro: hay tareas, no filtra uncompleted, pero visible es 0 (no debería pasar)
-             msg = "  Nada que mostrar."
+             msg = "  Nothing to show."
 
         # Solo mostramos el panel de "Vacio" si NO estamos en modo Omni (para no spammear)
         if not is_omni:
@@ -211,7 +211,7 @@ def toggle_task(task_id):
         save_tasks(tasks)
         print_tasks(tasks)
     else:
-        console.print(f"[danger]Error:[/danger] ID {task_id} no existe en este contexto.")
+        console.print(f"[danger]Error:[/danger] ID {task_id} does not exist in this context.")
 
 def delete_task(task_id):
     tasks = get_tasks()
@@ -220,22 +220,22 @@ def delete_task(task_id):
     if 0 <= index < len(tasks):
         removed = tasks.pop(index)
         save_tasks(tasks)
-        console.print(f"[warning]Eliminado:[/warning] {removed['content']}")
+        console.print(f"[warning]Deleted:[/warning] {removed['content']}")
         print_tasks(tasks)
     else:
-        console.print(f"[danger]Error:[/danger] ID {task_id} no existe.")
+        console.print(f"[danger]Error:[/danger] ID {task_id} does not exist.")
 
 def reset_context():
     """Borra TODAS las tareas del contexto actual (Wipeout)."""
     # Feature 2: Borrado total del directorio, no reinicio.
     save_tasks([]) # Guardar lista vacía
-    console.print(Panel(f"[danger]☢️  Contexto purgado:[/danger]\n{get_context_path()}", expand=False))
+    console.print(Panel(f"[danger]☢️  Context purged:[/danger]\n{get_context_path()}", expand=False))
 
 def show_omni_view(show_uncompleted=False):
     """Feature 4: Muestra tareas de TODOS los directorios registrados."""
     db = load_db()
     if not db:
-        console.print(Panel("🪐 El universo está vacío 🪐. No hay tareas por aquí.", style="warning"))
+        console.print(Panel("🪐 The universe is empty 🪐. No tasks around here.", style="warning"))
         return
 
     console.print(Text(" 🪐 OMNI VIEW - GLOBAL STATUS 🪐 ", style="bold black on #fe8019"), justify="center")
@@ -255,17 +255,17 @@ def show_omni_view(show_uncompleted=False):
         total_projects += 1
     
     if total_projects == 0:
-         console.print("Nada pendiente en ningún sistema. ¡Impresionante!", justify="center", style="success")
+         console.print("Nothing pending in any system. Impressive!", justify="center", style="success")
 
 def main():
-    parser = argparse.ArgumentParser(description="CLI ToDo App V2 - Context Aware")
+    parser = argparse.ArgumentParser(description="CLI ToDo App V2 - Context Aware (by tinchosalvatore)")
     
-    parser.add_argument("-a", "--add", nargs="+", help="Añadir tarea")
-    parser.add_argument("-t", "--toggle", type=int, help="Toggle tarea ID")
-    parser.add_argument("-d", "--delete", type=int, help="Eliminar tarea ID")
-    parser.add_argument("-r", "--reset", action="store_true", help="BORRAR todas las tareas de este dir")
-    parser.add_argument("-u", "--uncompleted", action="store_true", help="Filtrar pendientes")
-    parser.add_argument("-o", "--omni", action="store_true", help="Vista Global (Todos los directorios)")
+    parser.add_argument("-a", "--add", nargs="+", help="Add task")
+    parser.add_argument("-t", "--toggle", type=int, help="Mark completed task by ID")
+    parser.add_argument("-d", "--delete", type=int, help="Delete task by ID")
+    parser.add_argument("-r", "--reset", action="store_true", help="Delete ALL tasks from context dir")
+    parser.add_argument("-u", "--uncompleted", action="store_true", help="Show only uncompleted tasks")
+    parser.add_argument("-o", "--omni", action="store_true", help="Global view(all directories)")
     
     args = parser.parse_args()
 
