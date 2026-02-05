@@ -61,6 +61,8 @@ The base command is `todo`. Remember that **tasks now depend on the directory** 
 | `todo -u` | Shows only **Pending** tasks (if empty, celebrate!). | `todo -u` |
 | `todo -r` | **Wipeout**: DELETES all tasks in this directory (total cleanup). | `todo -r` |
 | `todo -o` | **Omni View**: Shows ALL tasks from ALL directories. | `todo -o` |
+| `todo -c` | **Clear**: Deletes ALL completed tasks in this directory. | `todo -c` |
+
 
 ---
 

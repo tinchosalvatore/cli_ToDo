@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CLI ToDo App - V2.0.1
+CLI ToDo App - V2.1.0
 Author: tinchosalvatore
 Description: Herramienta CLI minimalista con gestión de tareas contextual (por directorio).
              Incluye modo 'Omni' para vista global y persistencia JSON estructurada.
@@ -8,8 +8,6 @@ Description: Herramienta CLI minimalista con gestión de tareas contextual (por 
 
 import argparse
 import json
-import os
-import sys
 from pathlib import Path
 from rich.console import Console
 from rich.theme import Theme
@@ -189,7 +187,7 @@ def print_tasks(tasks, context_name=None, show_only_uncompleted=False, is_omni=F
         console.print()
         progress_render = get_progress_bar(completed_count, total_count)
         console.print(progress_render)
-        console.print("v2.0.1 by tinchosalvatore", style="dim italic", justify="right")
+        console.print("v2.1.0 by tinchosalvatore", style="dim italic", justify="right")
         console.print()
 
 # ==========================================
@@ -224,6 +222,21 @@ def delete_task(task_id):
         print_tasks(tasks)
     else:
         console.print(f"[danger]Error:[/danger] ID {task_id} does not exist.")
+
+def clear_completed():
+    """Feature V2.1.0: Borra solo las tareas completadas del contexto actual."""
+    tasks = get_tasks()
+    # Filtramos: Nos quedamos solo con las NO completadas
+    remaining_tasks = [t for t in tasks if not t['completed']]
+    
+    removed_count = len(tasks) - len(remaining_tasks)
+    
+    if removed_count > 0:
+        save_tasks(remaining_tasks)
+        console.print(f"[warning]Cleaned up:[/warning] {removed_count} completed tasks removed.")
+        print_tasks(remaining_tasks)
+    else:
+        console.print("[dim]No completed tasks to clean.[/dim]")
 
 def reset_context():
     """Borra TODAS las tareas del contexto actual (Wipeout)."""
@@ -263,6 +276,7 @@ def main():
     parser.add_argument("-a", "--add", nargs="+", help="Add task")
     parser.add_argument("-t", "--toggle", type=int, help="Mark completed task by ID")
     parser.add_argument("-d", "--delete", type=int, help="Delete task by ID")
+    parser.add_argument("-c", "--clear", action="store_true", help="Clear ALL completed tasks in context")
     parser.add_argument("-r", "--reset", action="store_true", help="Delete ALL tasks from context dir")
     parser.add_argument("-u", "--uncompleted", action="store_true", help="Show only uncompleted tasks")
     parser.add_argument("-o", "--omni", action="store_true", help="Global view(all directories)")
@@ -278,6 +292,8 @@ def main():
         toggle_task(args.toggle)
     elif args.delete:
         delete_task(args.delete)
+    elif args.clear:
+        clear_completed()
     elif args.reset:
         reset_context()
     elif args.uncompleted:

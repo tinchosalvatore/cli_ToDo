@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-02-04
+
+### Added
+- **New Command:** `todo -c` or `todo --clear` to delete only completed tasks in the current context directory.
+- **New Script:** `update.sh` uninstalls and reinstalls the tool, preserving user data (previous taks + language).
+
+
 ## [2.0.1] - 2026-01-25
 
 ### Changed
